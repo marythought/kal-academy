@@ -69,22 +69,21 @@ end
 # Evaluate an expression given only single digits and only 2 operators * and +.
 # "2 + 4 * 5 * 3 + 1 + 2 * 4"
 
-# def simple_math(expression)
-#   addition = Stack.new
-#   multiply = Stack.new
-#   numbers = Stack.new
-#   expression.gsub(" ", "").each_char do |char|
-#     if char.match(/1234567890/)
-#       if !multiply.peek.nil
-#         numbers.push(multiply.pop.to_i * char.to_i)
-#       else
-#         numbers.push(char)
-#       end
-#     end
-#     if char == "+"
-#       addition.push(numbers.pop)
-#     elsif char == "*"
-#       multiply.push(numbers.pop)
-#     end
-#   end
-# end
+def simple_math(expression)
+  numbers = Stack.new
+  last = nil
+  expression.each_char do |char|
+    if char =~ /[1234567890]/
+      if !last.nil?
+        numbers.push(last * char.to_i)
+        last = nil
+      else
+        numbers.push(char.to_i)
+      end
+    end
+    last = numbers.pop if char == "*"
+  end
+  result = 0
+  result += numbers.pop until numbers.peek.nil?
+  result
+end
