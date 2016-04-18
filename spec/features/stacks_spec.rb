@@ -28,6 +28,13 @@ describe 'stack exercises' do
     assert_equal "balanced", valid_parenthesis("(2 + 3) * (3 / 4)"), "finds balanced"
   end
 
+  it 'can do some simple math' do
+    assert_equal 20, simple_math("2 + 3 * 4 + 2 * 3")
+    assert_equal 32, simple_math("2 + 3 * 4 * 2 + 2 * 3")
+    assert_equal 13, simple_math("1 + 2 + 3 + 7")
+    assert_equal 24, simple_math("1 * 3 * 4 * 2")
+  end
+
   it 'a function to reverse a stack' do
     mystack = Stack.new
     mystack.push(1)

@@ -2,4 +2,4 @@
 
 ## Assignments
 * Week 1: Arrays
-* Week 3: Stacks (& Queues)
+* Weeks 2 & 3: Stacks & Queues) -- roll your own, array-based
