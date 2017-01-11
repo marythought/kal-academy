@@ -1,38 +1,34 @@
 class Queue
-  attr_accessor :array, :head, :tail, :count
+  attr_accessor :array, :count
 
   def initialize
-    @array = [nil, nil, nil, nil]
+    @array = []
     @count = 0
-    @tail = 0
-    @head = 0
   end
 
   def enqueue(value)
-    @array[@tail] = value
+    @array << value
     @count += 1
-    if @count == @array.length
-      # increase capacity by doubling array length
-      @array.length.times do
-        @array << nil
-      end
-    end
-    @tail = (@tail + 1) % @array.length
-    puts @tail
   end
 
   def dequeue
     return "Queue is empty" if @count == 0
     @count -= 1
-    obj = @array[@head]
-    @array[@head] = nil
-    @head = (@head + 1) % @array.length
-    obj
+    @array.shift
   end
 
   def to_s
   end
 
   def peek
+  end
+end
+
+def binary_nums(top_limit)
+  binarys = Queue.new
+  binarys.enqueue(1)
+  loop do
+    num = binarys.dequeue
+    
   end
 end

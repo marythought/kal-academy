@@ -6,8 +6,8 @@
 def find_loner(array)
   return nil if array.length.even?
   low = 0
-  high = array.length
-  mid = (low + high) / 2
+  high = array.length #11
+  mid = (low + high) / 2 # 5 = 0 + 11 / 2
   until high == low
     if mid.even?
       # even index, should match # to its right unless loner has occured
@@ -41,6 +41,30 @@ def magic_index(array)
     return index if val == index
   end
   "no magic index"
+end
+
+
+def magic_index_binary(array)
+  low = 0
+  high = array.length #6
+  mid = (low + high) / 2 #3
+  loop do
+    # if array[mid] == 0 && array[0] != 0
+    #   return "no magic array"
+    if array[mid] > mid
+      # value at array[mid] is 5. 5 is greater than 3. So nothing to the right can be a magic index. We could still have one to the left.
+      high = mid #1
+      mid = (low + high) / 2 #0
+    elsif array[mid] < mid
+      # Nothing to the left can be a magic index. We could still have one to the right.
+      low = mid
+      mid = (low + high) / 2
+    elsif array[mid] == mid
+      return mid
+    else
+      break
+    end
+  end
 end
 
 

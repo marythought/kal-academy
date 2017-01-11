@@ -3,7 +3,9 @@ require "arrays.rb"
 
 describe 'question 1' do
   it "finds the single value in an array of increasing doubles in O(log n) time" do
-    assert_equal 4, find_loner([1, 1, 3, 3, 4, 5, 5, 7, 7, 8, 8]), "works in the middle"
+    assert_equal 4, find_loner([1, 1, 3, 3, 4, 5, 5, 7, 7, 8, 8, 9, 9]), "works below the fold"
+    assert_equal 7, find_loner([1, 1, 3, 3, 4, 4, 5, 5, 7, 8, 8]), "works above the fold"
+    assert_equal 4, find_loner([1, 1, 3, 3, 4, 5, 5, 7, 7]), "works in the middle"
     assert_equal 1, find_loner([1, 3, 3, 4, 4, 5, 5, 7, 7, 8, 8]), "works for first number"
     assert_equal 8, find_loner([1, 1, 3, 3, 4, 4, 5, 5, 7, 7, 8]), "works for last number"
   end
@@ -13,6 +15,11 @@ describe 'question 2' do
   it "finds the magic index in an array of sorted distinct integers" do
     assert_equal 2, magic_index([-1, 0, 2, 5, 7]), "works for a magic array"
     assert_equal "no magic index", magic_index([23, 24, 25]), "works for no number"
+    assert_equal 2, magic_index_binary([-1, 0, 2, 5, 7, 10, 12]), "binary search works for a magic array below the fold"
+    assert_equal 5, magic_index_binary([-1, 0, 1, 2, 3, 5, 10, 200]), "binary search works for a magic array above the fold"
+    assert_equal 5, magic_index_binary([-1, 0, 1, 2, 3, 5]), "binary search works for a magic array last #"
+    assert_equal 0, magic_index_binary([0, 10, 20, 30, 35, 50, 100, 200]), "binary search works for a magic array first #"
+    # assert_equal "no magic index", magic_index_binary([23, 24, 25, 100, 300]), "binary search works for no magic array"
   end
 end
 
