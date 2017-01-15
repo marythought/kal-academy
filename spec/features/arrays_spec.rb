@@ -49,18 +49,19 @@ end
 
 describe 'question 5' do
   it "identifies the index of an element in an ascending array" do
-    skip
-    #TODO
+    assert_equal 7, adjacent_elements([8, 7, 6, 7, 6, 5, 4, 3, 2, 3, 4, 3], 3), "works in the middle"
+    assert_equal 11, adjacent_elements([8, 7, 6, 7, 6, 5, 4, 5, 4, 5, 4, 3], 3), "works when last element"
+    assert_equal 0, adjacent_elements([8, 7, 6, 7, 6, 5, 4, 3, 2, 3, 4, 3], 8), "works when first element"
   end
 end
 
 describe 'question 6' do
   it "returns two arrays when one element is the sum of the others" do
-    assert_equal(array_sum([1, 2, 3, 6]), [[6], [1, 2, 3]])
-    assert_equal(array_sum([-4, 5, 8, -3, 10]), [[8], [-3, 10, -4, 5]], "with negative nums")
+    assert_equal([[6], [1, 2, 3]], array_sum_additive([1, 2, 3, 6]), "with positive nums")
+    assert_equal([[8], [-4, 5, -3, 10]], array_sum_additive([-4, 5, 8, -3, 10]), "with negative nums")
   end
   it "returns an empty array when an array does not fit the pattern" do
-    assert_equal(array_sum([1, 2, 3, 7]), [])
-    assert_equal(array_sum([]), [], "an empty array")
+    assert_equal([], array_sum_additive([1, 2, 3, 7]), "array doesn't work")
+    assert_equal([], array_sum_additive([]), "an empty array")
   end
 end

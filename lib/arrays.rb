@@ -34,7 +34,6 @@ end
 # A[i] = i. Given a sorted array of distinct integers, write a method to find
 # a magic index if one exists, in an array A.
 # FOLLOW UP: What if the values are not distinct?
-# TODO: followup with binary search, if value > index then quit
 
 def magic_index(array)
   array.each_with_index do |val, index|
@@ -43,7 +42,7 @@ def magic_index(array)
   "no magic index"
 end
 
-
+# DONE: followup with binary search, if value > index then quit
 def magic_index_binary(array)
   low = 0
   high = array.length #6
@@ -67,7 +66,6 @@ def magic_index_binary(array)
   end
 end
 
-
 # 3. Given a sorted array of n integers that has been rotated an unknown
 # number of times, write code to find an element in the array. You may assume
 # that the array was originally sorted in increasing order.
@@ -85,7 +83,7 @@ def find_element_index(array, ele)
       return index if ele == array[index]
       index += 1
     end
-  else
+  elsif ele <= array[0]
     index = -1
     loop do
       match = array.length + index if ele == array[index]
@@ -106,6 +104,7 @@ end
 # find that duplicate.
 # ex [1, 5, 4, 2, 3, 2]
 def find_dup(array)
+  # 17 - (1 + 2 + 3 + 4 + 5) = 2 --- total in this array minus total if there were no dupes
   array.reduce(&:+) - (1..(array.length - 1)).reduce(&:+)
 end
 
@@ -119,24 +118,27 @@ end
 
 # 5. Search an element in an array where difference between adjacent
 # elements is 1.
-# For example: arr[] = {8, 7, 6, 7, 6, 5, 4, 3, 2, 3, 4, 3}
+# For example: arr = [8, 7, 6, 7, 6, 5, 4, 3, 2, 3, 4, 3]
 # Search for 3 and Output: Found at index 7
 def adjacent_elements(array, element)
-  # TODO
-  # compare to first num, find difference (5)
-  # move ahead that difference, compare (2)
-  # either find it or if you hit the end and don't find it, then what?
+  current_index = 0
+  until array[current_index] == element or (current_index >= array.length - 1)
+    next_move = (array[current_index] - element).abs #5
+    current_index += next_move
+  end
+  current_index
 end
 
 # 6. Given an array of numbers, split the array into two where one array
 # contains the sum of n-1 numbers & the other array with all the n-1 elements.
 # example: 4, 2, 3, 9 -- answer is [4 + 2 + 3], [9]
 
-def array_sum(array)
-  array.length.times do
-    temp = array.shift
-    return [[temp], array] if temp == array.reduce(&:+)
-    array << temp
+def array_sum_additive(array)
+  sum = array.reduce(&:+)
+  test_num = sum / 2 if sum
+  if array.include?(test_num)
+    array.delete(test_num)
+    return [[test_num], array]
   end
   []
 end
